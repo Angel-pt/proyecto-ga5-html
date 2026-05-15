@@ -16,10 +16,10 @@ jobs:
           if [ ! -f index.html ]; then echo "ERROR: Falta index.html"; exit 1; fi
           if [ ! -f estilo.css ]; then echo "ERROR: Falta estilo.css"; exit 1; fi
 
-      - name: Validar estructura HTML
-        uses: w3c/html-validator@v1
+      - name: W3C HTML Validator
+        uses: center-key/w3c-html-validator@v1.1.0
         with:
-          files: index.html
+           files: index.html
           
       - name: Preparar archivos para publicación
         run: |
