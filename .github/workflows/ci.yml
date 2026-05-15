@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Obtener archivos del repositorio
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Verificar existencia de archivos obligatorios
         run: |
@@ -16,17 +16,15 @@ jobs:
           if [ ! -f estilo.css ]; then echo "ERROR: Falta estilo.css"; exit 1; fi
 
       - name: W3C HTML Validator
-      -  uses: center-key/w3c-html-validator@v1.1.0
+        uses: w3c/html-validator@v1
         with:
            files: index.html
           
       - name: Preparar archivos para publicación
-        run: |
-            mkdir publicacion
-            cp *.html *.css publicacion/
-
+        run: mkdir public && cp *.html *.css public/
+           
       - name: Desplegar en GitHub Pages
-      - uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
              github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./publicacion
+             publish_dir: ./public
