@@ -1,21 +1,22 @@
-name: Integración Continua - Revisión de Código
+
 on:
- push:
-   branches: [ main ]
+  push:
+    branches: [main]
 
 jobs:
- revision:
-  runs-on: ubuntu-latest
-  steps:
-      -name: Obtener archivos del repositorio
-       uses: actions/checkout@v4
+  revision:
+    runs-on: ubuntu-latest
 
-      -name: Verificar existencia de archivos obligatorios
-       run: |
-       if [ ! -f index.html ]; then echo "ERROR: Falta index.html"; exit 1; fi
-       if [ ! -f estilo.css ]; then echo "ERROR: Falta estilo.css"; exit 1; fi
+    steps:
+      - name: Obtener archivos del repositorio
+        uses: actions/checkout@v4
 
-      -name: Validar estructura HTML
-       uses: w3c/html-validator@v1
-       with:
-         files: index.html
+      - name: Verificar existencia de archivos obligatorios
+        run: |
+          if [ ! -f index.html ]; then echo "ERROR: Falta index.html"; exit 1; fi
+          if [ ! -f estilo.css ]; then echo "ERROR: Falta estilo.css"; exit 1; fi
+
+      - name: Validar estructura HTML
+        uses: w3c/html-validator@v1
+        with:
+          files: index.html
