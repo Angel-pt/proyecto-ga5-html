@@ -20,3 +20,14 @@ jobs:
         uses: w3c/html-validator@v1
         with:
           files: index.html
+          
+      - name: Preparar archivos para publicación
+        run: |
+            mkdir publicacion
+            cp *.html *.css publicacion/
+
+      - name: Desplegar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+             github_token: ${{ secrets.GITHUB_TOKEN }}
+             publish_dir: ./publicacion
